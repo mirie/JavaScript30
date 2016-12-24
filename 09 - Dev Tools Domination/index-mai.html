@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Console Tricks!</title>
+</head>
+<body>
+
+  <p onClick="makeGreen()">×BREAK×DOWN×</p>
+
+  <script>
+    const dogs = [{ name: 'Snickers', age: 2 }, { name: 'hugo', age: 8 }];
+
+    function makeGreen() {
+      const p = document.querySelector('p');
+      p.style.color = '#BADA55';
+      p.style.fontSize = '50px';
+    }
+
+    // Regular
+    console.log('hello');
+
+    // Interpolated
+    console.log('Hello I am a %s string!', dogs[0].name);
+    console.log(`Hello I am ${dogs[0].name}`);
+
+    // Styled
+    console.log('%c I am some grreat text', 'font-size: 15px; background: red; text-shadow: 10px 10px 0 blue');
+
+    // warning!
+    console.warn('OH NOO');
+
+    // Error :|
+    console.error('NOPE!');
+    
+    // Info
+    console.info('This is some info');
+
+    // Testing
+    console.assert(1 === 1, 'This won\'t display!');
+
+    console.assert(1 === 2, 'There\'s something wrong with this data!');
+
+    // clearing
+//    console.clear(); // clears the console messages.
+
+    // Viewing DOM Elements
+    const p = document.querySelector('p');
+    console.log(p); // vs .dir().
+    console.dir(p);
+
+    // Grouping together
+    
+    // Regular list of logs items.
+    dogs.forEach(dog => {
+      console.log(`This is ${dog.name}`);
+      console.log(`${dog.name} is ${dog.age} years old`);
+      console.log(`${dog.name} is ${dog.age * 7} dog years old`);
+    });
+
+    // Grouping log items together!
+    dogs.forEach(dog => {
+      console.group(`${dog.name}`);
+      console.log(`This is ${dog.name}`);
+      console.log(`${dog.name} is ${dog.age} years old`);
+      console.log(`${dog.name} is ${dog.age * 7} dog years old`);
+      console.groupEnd(`${dog.name}`);
+    });
+
+    // Collapse the groups by default.
+    dogs.forEach(dog => {
+      console.groupCollapsed(`${dog.name}`);
+      console.log(`This is ${dog.name}`);
+      console.log(`${dog.name} is ${dog.age} years old`);
+      console.log(`${dog.name} is ${dog.age * 7} dog years old`);
+      console.groupEnd(`${dog.name}`);
+    });
+ 
+    // counting
+    console.count('me');
+    console.count('me');
+    console.count('you');
+    console.count('me');
+    console.count('me');
+
+    // timing
+    console.time('fetching data');
+    fetch('https://api.github.com/users/wesbos')
+      .then(data => data.json())
+      .then(data => {
+        console.timeEnd('fetching data');
+      })
+    
+    // tabular format
+    console.table(dogs);
+
+  </script>
+</body>
+</html>
